@@ -95,9 +95,20 @@ export default {
             dobErrMsg: "",
             dobErrVisible: false,
             nullMsg: "This field is required!",
+            users:[],
         };
     },
-    computed: {},
+    computed: {
+       latestId() {
+            if (this.users.length > 0) return this.users[this.users.length - 1].userId;
+            return 0;
+
+        },
+    },
+
+    mounted(){
+        this.GetUsers();
+    },
 
     methods: {
         IsPhoneValid() {
@@ -212,10 +223,53 @@ export default {
             return nullExist;
         },
 
-        SubmitUser() {
+       GetUsers(){
+            let users = JSON.parse(this.$localStorage.get('users'));
+            if (users != undefined)  this.users = users;
+            else
+            {
+                this.users.push({
+                    userId: 1,
+                    firstName: 'Web Developer',
+                    lastName: 'Web Developer',
+                    gender: 'Male',
+                    dateOfBirth: '2020-10-01',
+                    city: 'Web Developer',
+                    phone: '01914658423',
+                    email: 's.sharna06@gmai.com'
+                },
+                {
+                    userId: 2,
+                    firstName: 'Web ',
+                    lastName: 'Web Developer',
+                    gender: 'Male',
+                    dateOfBirth: '2020-9-02',
+                    city: 'Web Developer',
+                    phone: '01914658423',
+                    email: 's.sharna06@gmai.com'
+                },
+                {
+                    userId: 3,
+                    firstName: ' Developer',
+                    lastName: 'Web Developer',
+                    gender: 'Male',
+                    dateOfBirth: '2021-10-02',
+                    city: 'Web Developer',
+                    phone: '01914658423',
+                    email: 's.sharna06@gmai.com'
+                });
+                this.$localStorage.set('users', JSON.stringify(this.users));
+            }
+               
             
+       },
+       SubmitUser() {
+
             if (!this.IsValid()) {
-                alert("You can submit Form");
+                this.users.userId = this.latestId + 1;
+                this.users.push(this.user);
+                this.$localStorage.set('users', JSON.stringify(this.users));
+
             }
         },
     },

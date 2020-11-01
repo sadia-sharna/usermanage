@@ -14,6 +14,7 @@
     "moment": "^2.29.1",
     "popper.js": "^1.14.3",
     "vue": "^2.6.11",
+    "vue-localstorage": "^0.6.2",
     "vue-plain-pagination": "^0.3.0",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
