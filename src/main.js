@@ -7,6 +7,7 @@ import Bootstrap from 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.css';
 import vPagination from 'vue-plain-pagination';
 
+
 Vue.config.productionTip = false
 
 new Vue({
