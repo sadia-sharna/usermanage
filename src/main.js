@@ -5,7 +5,7 @@ import jQuery from 'jquery/dist/jquery.min.js';
 import Popper from '@popperjs/core/dist/umd/popper.min.js';
 import Bootstrap from 'bootstrap/dist/js/bootstrap.min.js';
 import 'bootstrap/dist/css/bootstrap.css';
-import vPagination from 'vue-plain-pagination'
+import vPagination from 'vue-plain-pagination';
 
 Vue.config.productionTip = false
 

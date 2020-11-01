@@ -1,9 +1,23 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Create User</router-link> |
-      <router-link to="/users">Users</router-link>
-    </div>
+      <nav class="navbar navbar-expand-lg bg-primary shadow-sm">
+        <div id="navbarNavDropdown" class="collapse navbar-collapse">
+            <ul class="navbar-nav w-100" id="ul">
+
+                <li class="nav-item active" style="cursor:pointer">
+                    <a class="nav-link ">
+                        <router-link  to="/">Create User</router-link>
+                    </a>
+                </li>
+                <li class="nav-item active " style="cursor:pointer" >
+                    <a class="nav-link">
+                        <router-link  to="/users">Users</router-link>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+ 
     <router-view/>
   </div>
 </template>
@@ -17,16 +31,14 @@
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
-}
 
-#nav a {
+#ul a {
   font-weight: bold;
-  color: #2c3e50;
+  color: white;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+#ul a.router-link-exact-active {
+  color: white;
+  border: 1px solid white;
+  padding:10px;
 }
 </style>
