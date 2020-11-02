@@ -1,6 +1,6 @@
 <template>
 <div>
-    <list-view :tableHeaders="tableHeaders" :tableRows="users" :columnNamesToSort="columnNamesToSort"/>
+    <list-view :tableHeaders="tableHeaders" :tableRows="users" :columnNamesToSort="columnNamesToSort" tableHeading="Users"/>
 
 </div>
 </template>

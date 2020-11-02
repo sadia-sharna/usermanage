@@ -1,10 +1,8 @@
 <template>
 <div class="container">
     <div class="card mt-5 ">
-        <div class="card-header text-center bg-light ">
-            <span class="text-center font-weight-bold">Users</span>
-
-        </div>
+        
+        <h4 class="mt-4">{{tableHeading}}</h4>
 
         <div class="card-body text-left">
             <div class="row mb-2">
@@ -68,7 +66,8 @@ export default {
     props: {
         tableHeaders: Array,
         tableRows: Array,
-        columnNamesToSort: Array
+        columnNamesToSort: Array,
+        tableHeading:String
     },
 
     components: {

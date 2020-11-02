@@ -8,7 +8,7 @@
                 <div class="form-group col-md-5">
                     <label class="float-left">First Name <span class="text-danger">&#42;</span></label>
                     <input type="text" class="form-control" placeholder="First Name" v-model="user.firstName" />
-                    <div v-show="fnameErrVisible">
+                    <div >
                         <small class="text-danger float-left">{{ fNameErrMsg }}</small>
                     </div>
                 </div>
@@ -16,7 +16,7 @@
                 <div class="form-group col-md-5">
                     <label class="float-left">Last Name <span class="text-danger">&#42;</span></label>
                     <input type="text" class="form-control" placeholder="Last Name" v-model="user.lastName" />
-                    <div v-show="lnameErrVisible">
+                    <div >
                         <small class="text-danger float-left">{{ lnameErrMsg }}</small>
                     </div>
                 </div>
@@ -29,14 +29,14 @@
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     </select>
-                    <div v-show="genderErrVisible">
+                    <div >
                         <small class="text-danger float-left">{{ genderErrMsg }}</small>
                     </div>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="float-left">Date of Birth <span class="text-danger">&#42;</span></label>
                     <input type="date" class="form-control" v-model="user.dateOfBirth" />
-                    <div v-show="dobErrVisible">
+                    <div>
                         <small class="text-danger float-left">{{ dobErrMsg }}</small>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                 <div class="form-group col-md-5">
                     <label class="float-left">Email <span class="text-danger">&#42;</span></label>
                     <input type="email" class="form-control" placeholder="Email" v-model="user.email" />
-                    <div v-show="emailErrVisible">
+                    <div >
                         <small class="text-danger float-left">{{ emailErrMsg }}</small>
                     </div>
                 </div>
@@ -58,7 +58,7 @@
                 <div class="form-group col-md-5">
                     <label class="float-left">Phone <span class="text-danger">&#42;</span></label>
                     <input type="number" class="form-control" placeholder="Phone" v-model="user.phone" />
-                    <div v-show="phoneErrVisible">
+                    <div >
                         <small class="text-danger float-left">{{
                 phoneErrMsg
               }}</small>
@@ -83,20 +83,27 @@ export default {
         return {
             user: {},
             phoneErrMsg: "",
-            phoneErrVisible: false,
             emailErrMsg: "",
-            emailErrVisible: false,
             fNameErrMsg: "",
-            fnameErrVisible: false,
             lnameErrMsg: "",
-            lnameErrVisible: false,
-            genderErrVisible: false,
             genderErrMsg: "",
             dobErrMsg: "",
-            dobErrVisible: false,
-            nullMsg: "This field is required!"
+            nullMsg: "This field is required!",
+            users:[]
         };
     },
+
+    mounted() {
+        this.GetUsers();
+       },
+
+       computed:{
+           latestId(){
+               
+               return (this.users.length > 0) ? this.users[this.users.length - 1].userId  : 0;
+
+           },
+       },
 
     methods: {
         IsPhoneValid() {
@@ -133,104 +140,109 @@ export default {
             let nullExist = false;
             console.log(this.user);
             if (this.user.firstName == null || this.user.firstName == "") {
-                this.fnameErrVisible = true;
+              
                 this.fNameErrMsg = this.nullMsg;
                 nullExist = true;
             } else if (
                 this.user.firstName.length < 2 ||
                 this.user.lastName.length > 50
             ) {
-                this.fnameErrVisible = true;
+                
                 this.fNameErrMsg = "Length should be between 2-50 characters";
                 nullExist = true;
             } else {
-                this.fnameErrVisible = false;
+               
+               this.fNameErrMsg = "";
 
             }
 
             if (this.user.lastName == null || this.user.lastName == "") {
-                this.lnameErrVisible = true;
+              
                 this.lnameErrMsg = this.nullMsg;
                 nullExist = true;
             } else if (
                 this.user.lastName.length < 2 ||
                 this.user.lastName.length > 50
             ) {
-                this.lnameErrVisible = true;
+                
                 this.lnameErrMsg = "Length should be between 2-50 characters";
                 nullExist = true;
             } else {
-                this.lnameErrVisible = false;
+                
+                this.lnameErrMsg = "";
 
             }
 
             if (this.user.gender == null || this.user.gender == "") {
-                this.genderErrVisible = true;
+              
                 this.genderErrMsg = this.nullMsg;
                 nullExist = true;
             } else {
-                this.genderErrVisible = false;
+               
+                 this.genderErrMsg="";
 
             }
             if (this.user.dateOfBirth == null || this.user.dateOfBirth == "") {
-                this.dobErrVisible = true;
+               
                 this.dobErrMsg = this.nullMsg;
                 nullExist = true;
-            } else if (!this.IsDobValid) {
-                this.dobErrVisible = true;
+            } else if (!this.IsDobValid()) {
+               
                 this.dobErrMsg = "Invalid Date of Birth";
                 nullExist = true;
             } else {
-                this.dobErrVisible = false;
+               
+               this.dobErrMsg = "";
 
             }
             if (this.user.phone == null || this.user.phone == "") {
-                this.phoneErrVisible = true;
+               
                 this.phoneErrMsg = this.nullMsg;
                 nullExist = true;
-            } else if (!this.IsPhoneValid) {
-                this.phoneErrVisible = true;
+            } else if (!this.IsPhoneValid()) {
+               
                 this.phoneErrMsg = "Invalid Phone Number";
                 nullExist = true;
             } else {
-                this.phoneErrVisible = false;
+                 this.phoneErrMsg = "";
+               
 
             }
             if (this.user.email == null || this.user.email == "") {
-                this.emailErrVisible = true;
+               
                 this.emailErrMsg = this.nullMsg;
                 nullExist = true;
-            } else if (!this.IsEmailValid) {
-                this.emailErrVisible = true;
+            } else if (!this.IsEmailValid()) {
+              
                 this.emailErrMsg = "Invalid Email";
                 nullExist = true;
             } else {
-                this.emailErrVisible = false;
+                 this.emailErrMsg = "";
+              
 
             }
             return nullExist;
         },
-
-        SubmitUser() {
+           
+            GetUsers() {
+            let users = JSON.parse(this.$localStorage.get('users'));
+            if (users != undefined) this.users = users;
+            else {
+                this.users=[];
+                this.$localStorage.set('users', JSON.stringify(this.users));
+            }
+        },
+        
+           SubmitUser() {
 
             if (!this.IsValid()) {
-                let users = JSON.parse(this.$localStorage.get('users'));
                
                 let fullName = `${this.user.firstName} ${this.user.lastName}`;
                
-               
                 this.$set(this.user, 'fullName', fullName);
-
-                if (users == undefined) { 
-                     var id = 1;
-                     users = [];
-                } 
-                else{
-                    var id = (users.length > 0) ? users[users.length - 1].userId + 1 : 1;
-                }
-                this.$set(this.user, 'userId', id);
-                users.push(this.user);
-                this.$localStorage.set('users', JSON.stringify(users));
+                this.$set(this.user, 'userId', this.latestId);
+                this.users.push(this.user);
+                this.$localStorage.set('users', JSON.stringify(this.users));
                 window.location = `#/users`;
 
             }
