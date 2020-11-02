@@ -89,21 +89,21 @@ export default {
             genderErrMsg: "",
             dobErrMsg: "",
             nullMsg: "This field is required!",
-            users:[]
+            users: []
         };
     },
 
     mounted() {
         this.GetUsers();
-       },
+    },
 
-       computed:{
-           latestId(){
-               
-               return (this.users.length > 0) ? this.users[this.users.length - 1].userId  : 0;
+    computed: {
+        latestId() {
 
-           },
-       },
+            return (this.users.length > 0) ? this.users[this.users.length - 1].userId : 0;
+
+        },
+    },
 
     methods: {
         IsPhoneValid() {
@@ -140,105 +140,105 @@ export default {
             let nullExist = false;
             console.log(this.user);
             if (this.user.firstName == null || this.user.firstName == "") {
-              
+
                 this.fNameErrMsg = this.nullMsg;
                 nullExist = true;
             } else if (
                 this.user.firstName.length < 2 ||
-                this.user.lastName.length > 50
+                this.user.firstName.length > 50
             ) {
-                
+
                 this.fNameErrMsg = "Length should be between 2-50 characters";
                 nullExist = true;
             } else {
-               
-               this.fNameErrMsg = "";
+
+                this.fNameErrMsg = "";
 
             }
 
             if (this.user.lastName == null || this.user.lastName == "") {
-              
+
                 this.lnameErrMsg = this.nullMsg;
                 nullExist = true;
             } else if (
                 this.user.lastName.length < 2 ||
                 this.user.lastName.length > 50
             ) {
-                
+
                 this.lnameErrMsg = "Length should be between 2-50 characters";
                 nullExist = true;
             } else {
-                
+
                 this.lnameErrMsg = "";
 
             }
 
             if (this.user.gender == null || this.user.gender == "") {
-              
+
                 this.genderErrMsg = this.nullMsg;
                 nullExist = true;
             } else {
-               
-                 this.genderErrMsg="";
+
+                this.genderErrMsg = "";
 
             }
             if (this.user.dateOfBirth == null || this.user.dateOfBirth == "") {
-               
+
                 this.dobErrMsg = this.nullMsg;
                 nullExist = true;
             } else if (!this.IsDobValid()) {
-               
+
                 this.dobErrMsg = "Invalid Date of Birth";
                 nullExist = true;
             } else {
-               
-               this.dobErrMsg = "";
+
+                this.dobErrMsg = "";
 
             }
             if (this.user.phone == null || this.user.phone == "") {
-               
+
                 this.phoneErrMsg = this.nullMsg;
                 nullExist = true;
             } else if (!this.IsPhoneValid()) {
-               
+
                 this.phoneErrMsg = "Invalid Phone Number";
                 nullExist = true;
             } else {
-                 this.phoneErrMsg = "";
-               
+                this.phoneErrMsg = "";
+
 
             }
             if (this.user.email == null || this.user.email == "") {
-               
+
                 this.emailErrMsg = this.nullMsg;
                 nullExist = true;
             } else if (!this.IsEmailValid()) {
-              
+
                 this.emailErrMsg = "Invalid Email";
                 nullExist = true;
             } else {
-                 this.emailErrMsg = "";
-              
+                this.emailErrMsg = "";
+
 
             }
             return nullExist;
         },
-           
-            GetUsers() {
+
+        GetUsers() {
             let users = JSON.parse(this.$localStorage.get('users'));
             if (users != undefined) this.users = users;
             else {
-                this.users=[];
+                this.users = [];
                 this.$localStorage.set('users', JSON.stringify(this.users));
             }
         },
-        
-           SubmitUser() {
+
+        SubmitUser() {
 
             if (!this.IsValid()) {
-               
-                let fullName = `${this.user.firstName} ${this.user.lastName}`;
-               
+
+                let fullName = JSON.parse(JSON.stringify(`${this.user.firstName} ${this.user.lastName}`));
+
                 this.$set(this.user, 'fullName', fullName);
                 this.$set(this.user, 'userId', this.latestId);
                 this.users.push(this.user);
@@ -250,7 +250,6 @@ export default {
     },
 };
 </script>
-
 <style scoped>
 .form-row {
     display: flex;
