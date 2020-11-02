@@ -35,33 +35,36 @@ export default {
             else {
                 this.users.push({
                     userId: 1,
-                    firstName: 'Web Developer',
-                    lastName: 'Web Developer',
-                    gender: 'Male',
+                    firstName: 'Sadia',
+                    lastName: 'Nehrin',
+                    gender: 'Female',
                     dateOfBirth: '2020-10-01',
-                    city: 'Web Developer',
-                    phone: '01914658423',
-                    email: 's.sharna06@gmai.com'
+                    city: 'Dhaka',
+                    phone: '01914658422',
+                    email: 's.sharna06@gmai.com',
+                    fullName: "Sadia Nehrin",
                 },
                 {
                     userId: 2,
-                    firstName: 'Web ',
-                    lastName: 'Web Developer',
+                    firstName: 'Abrar',
+                    lastName: 'Ihsas',
                     gender: 'Male',
-                    dateOfBirth: '2020-9-02',
-                    city: 'Web Developer',
-                    phone: '01914658423',
-                    email: 's.sharna06@gmai.com'
+                    dateOfBirth: '2020-11-01',
+                    city: 'Dhaka',
+                    phone: '01914658523',
+                    email: 'abrar@gmai.com',
+                    fullName: 'Abrar Ihsas',
                 },
                 {
                     userId: 3,
-                    firstName: ' Developer',
-                    lastName: 'Web Developer',
-                    gender: 'Male',
-                    dateOfBirth: '2021-10-02',
-                    city: 'Web Developer',
-                    phone: '01914658423',
-                    email: 's.sharna06@gmai.com'
+                    firstName: 'Sufia',
+                    lastName: 'Akter',
+                    gender: 'Female',
+                    dateOfBirth: '1990-06-06',
+                    city: 'Dhaka',
+                    phone: '01714658527',
+                    email: 'sufia@gmai.com',
+                    fullName: 'Sufia Akter',
                 });
                 this.$localStorage.set('users', JSON.stringify(this.users));
             }
@@ -69,28 +72,23 @@ export default {
         SetTableHeaders(){
             this.tableHeaders.push({
                 columnName:'Name',
-                key: 'firstName',
-                sortable:true,
+                key: 'fullName'
             },
             {
                 columnName:'Gender',
-                key: 'gender',
-                sortable:true,
+                key: 'gender'
             },
             {
                 columnName:'DateofBirth',
-                key: 'dateOfBirth',
-                sortable:true,
+                key: 'dateOfBirth'
             },
             {
                 columnName:'Email',
-                key: 'email',
-                sortable:true,
+                key: 'email'
             },
             {
                 columnName:'Phone',
-                key: 'phone',
-                sortable:true,
+                key: 'phone'
             }
             );
 

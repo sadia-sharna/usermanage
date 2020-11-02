@@ -11,7 +11,7 @@
                 <div class="col-md-2">
                     <select class="form-control" name="" v-model="pageSize">
 
-                        <option value="1">5</option>
+                        <option value="5">5</option>
                         <option value="10">10</option>
                         <option value="25">25</option>
                         <option value="100">100</option>
@@ -76,7 +76,7 @@ export default {
     },
     data() {
         return {
-            pageSize: 1,
+            pageSize: 5,
             pageNumber: 1,
             columnToSort: 'Sort By',
             bootstrapPaginationClasses: {
@@ -122,8 +122,8 @@ export default {
         SortByColumn(item) {
             if(item.type=='text'){
                 return this.displayRows.sort((a, b) => {
-                if (a[item.key] < b[item.key]) return -1 ;
-                if (a[item.key] > b[item.key]) return 1 ;
+                if (a[item.key] < b[item.key]) return -1;
+                else if (a[item.key] >= b[item.key]) return 1;
                 return 0;
             });
          
